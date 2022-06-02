@@ -1,3 +1,2 @@
-# Gomoku Project
-
-[Start here](docs/overview.asciidoc)
+# Gomoku Game
+Made in C# (WPF)
