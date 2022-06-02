@@ -1,0 +1,107 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:View.Screens"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="View.Screens.ScreenA"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" Width="Auto">
+
+    <Grid  Width="Auto" Height="Auto">
+
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="../Images/sky.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+
+        <Viewbox Name="ViewBox1"  MinHeight="5" StretchDirection="Both" Grid.Row="0" Stretch="Uniform">
+
+            <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="20,1,0.1,0">
+                <Ellipse  Name="gear" Width="2" Height="2" RenderTransformOrigin="0.5, 0.5">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Images/gear.png"/>
+                    </Ellipse.Fill>
+
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="rotation" />
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Rectangle.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="gear" Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:5" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </Ellipse.Triggers>
+                </Ellipse>
+
+                
+            </Grid>
+        </Viewbox>
+
+        <Viewbox Name="ViewBox2"  MinHeight="5" StretchDirection="Both" Grid.Row="1" Stretch="Uniform" >
+
+
+            <Grid Grid.Row="1" HorizontalAlignment="Center" Width="300" Height="100">
+                <StackPanel >
+                    <TextBlock  FontSize="40" TextAlignment="Center"  Text="Game Size:" Height="Auto"  />
+                    <Slider Value="{Binding Size.Value}" Minimum="{Binding Minimum}" IsSnapToTickEnabled="True"  TickFrequency="1" SmallChange="1"  TickPlacement="None" Width="300"   Maximum="{Binding Maximum}" x:Name="slider" />
+                    <TextBlock  FontSize="20" TextAlignment="Center"  Text="{Binding Value, ElementName=slider}" Height="24" RenderTransformOrigin="0.5,0.5" Width="54"/>
+                </StackPanel>
+            </Grid>
+        </Viewbox>
+        <Viewbox Name="ViewBox3"  MinHeight="5" StretchDirection="Both" Grid.Row="2" 
+                     
+                     Stretch="Uniform"  >
+            <Grid Grid.Row="2"   Width="Auto" Height="Auto">
+                <CheckBox x:Name="capturing"   IsChecked="{Binding Capture.Value}" HorizontalAlignment="Center" Command="{Binding Checked}"    RenderTransformOrigin="0.5,0.5" Margin="0,9,0,9">
+                    <TextBlock><Run Foreground="DarkRed"  FontWeight="Bold" Text="capturing"/></TextBlock>
+                </CheckBox>
+
+            </Grid>
+        </Viewbox>
+        <Viewbox Name="ViewBox4"  MinHeight="5" StretchDirection="Both" Grid.Row="3" 
+                     
+                     Stretch="Uniform">
+            <Grid Grid.Row="3"  Width="Auto" Height="Auto">
+                <Button Background="#0cff8b" FontSize="14" FontFamily="Unispace" DockPanel.Dock="Left" Foreground="Black" Content="Start new game" Command="{Binding SwitchToScreenB}"
+                Height="100" Width="200"  />
+            </Grid>
+        </Viewbox>
+
+        <Viewbox>
+            <Grid Grid.Row="4" Margin="0.4,0.4,20,0">
+                <Ellipse  Name="player" Width="2" Height="2" RenderTransformOrigin="0.5, 0.5">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Images/mike.png"/>
+                    </Ellipse.Fill>
+
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="rotation2" />
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Rectangle.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="player" Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:5" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </Ellipse.Triggers>
+                </Ellipse>
+            </Grid>
+        </Viewbox>
+    </Grid>
+
+</UserControl>
